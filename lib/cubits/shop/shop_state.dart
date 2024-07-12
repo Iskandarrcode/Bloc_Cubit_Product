@@ -9,6 +9,7 @@ final class LoadingState extends ShopState {}
 final class LoadedState extends ShopState {
   List<Shop> products;
   LoadedState(this.products);
+  
 }
 
 final class ErrorState extends ShopState {
