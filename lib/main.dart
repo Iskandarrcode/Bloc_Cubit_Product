@@ -1,4 +1,5 @@
 import 'package:bloc_cubit_products/cubits/shop/shop_cubits.dart';
+import 'package:bloc_cubit_products/cubits/theme/theme_cubit.dart';
 import 'package:bloc_cubit_products/views/screens/shop_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,10 +21,27 @@ class MyApp extends StatelessWidget {
             return ShopCubits();
           },
         ),
+        BlocProvider(
+          create: (context) {
+            return ThemeCubit();
+          },
+        )
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: ShopScreen(),
+      child: BlocBuilder<ThemeCubit, bool>(
+        builder: (BuildContext context, bool state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                centerTitle: false,
+              ),
+            ),
+            darkTheme: ThemeData.dark(),
+            themeMode: state ? ThemeMode.dark : ThemeMode.light,
+            home: const ShopScreen(),
+          );
+        },
       ),
     );
   }

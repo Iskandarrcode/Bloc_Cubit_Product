@@ -32,8 +32,10 @@ class _AlertDialogsState extends State<AlertDialogs> {
 
   @override
   void dispose() {
-    titleTextController.dispose();
-    imageUrlController.dispose();
+    if (!widget.isAdd) {
+      titleTextController.dispose();
+      imageUrlController.dispose();
+    }
     super.dispose();
   }
 

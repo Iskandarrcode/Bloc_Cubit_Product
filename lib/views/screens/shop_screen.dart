@@ -1,5 +1,6 @@
 import 'package:bloc_cubit_products/cubits/shop/shop_cubits.dart';
 import 'package:bloc_cubit_products/cubits/shop/shop_state.dart';
+import 'package:bloc_cubit_products/cubits/theme/theme_cubit.dart';
 import 'package:bloc_cubit_products/views/screens/favorit_screen.dart';
 import 'package:bloc_cubit_products/views/widgets/add_alert_dialogs.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,9 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.read<ThemeCubit>();
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
           "Products",
@@ -46,6 +46,30 @@ class _ShopScreenState extends State<ShopScreen> {
             icon: const Icon(Icons.favorite_border),
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const DrawerHeader(
+              child: Row(
+                children: [
+                  Text(
+                    "Settings",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SwitchListTile(
+              title: const Text('Dark mode'),
+              value: themeCubit.state,
+              onChanged: (value) => themeCubit.toggleTheme(),
+            ),
+          ],
+        ),
       ),
       body: BlocBuilder<ShopCubits, ShopState>(
         builder: (context, state) {
