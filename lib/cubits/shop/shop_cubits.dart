@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class ShopCubits extends Cubit<ShopState> {
   ShopCubits() : super(InitialState());
-  List<Shop> products = [];
+  List<Product> products = [];
 
   Future<void> getProducts() async {
     try {
@@ -13,7 +13,7 @@ class ShopCubits extends Cubit<ShopState> {
       await Future.delayed(const Duration(seconds: 2));
 
       products.add(
-        Shop(
+        Product(
           id: UniqueKey().toString(),
           title: "Naushnik",
           imageUrl:
@@ -38,7 +38,7 @@ class ShopCubits extends Cubit<ShopState> {
       await Future.delayed(const Duration(seconds: 1));
 
       products.add(
-        Shop(
+        Product(
           id: id,
           title: title,
           imageUrl: imageUrl,
@@ -69,16 +69,15 @@ class ShopCubits extends Cubit<ShopState> {
       print("Edit qilishda xatolik: $e");
       emit(ErrorState("Edit qilishda xatolik"));
     }
-
-    
   }
+
   Future<void> editIcon(String id) async {
-      final indexProduct = products.indexWhere((product) => product.id == id);
-      if (indexProduct != -1) {
-        products[indexProduct].isFavorite = !products[indexProduct].isFavorite;
-        emit(LoadedState(products));
-      }
+    final indexProduct = products.indexWhere((product) => product.id == id);
+    if (indexProduct != -1) {
+      products[indexProduct].isFavorite = !products[indexProduct].isFavorite;
+      emit(LoadedState(products));
     }
+  }
 
   Future<void> deleteProducts(int index) async {
     await Future.delayed(const Duration(milliseconds: 500));

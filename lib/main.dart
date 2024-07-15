@@ -1,3 +1,4 @@
+import 'package:bloc_cubit_products/cubits/cart/cart_cubit.dart';
 import 'package:bloc_cubit_products/cubits/shop/shop_cubits.dart';
 import 'package:bloc_cubit_products/cubits/theme/theme_cubit.dart';
 import 'package:bloc_cubit_products/views/screens/shop_screen.dart';
@@ -25,7 +26,12 @@ class MyApp extends StatelessWidget {
           create: (context) {
             return ThemeCubit();
           },
-        )
+        ),
+        BlocProvider(
+          create: (context) {
+            return CartCubit();
+          },
+        ),
       ],
       child: BlocBuilder<ThemeCubit, bool>(
         builder: (BuildContext context, bool state) {

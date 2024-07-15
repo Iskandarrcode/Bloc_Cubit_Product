@@ -1,10 +1,10 @@
-class Shop {
+class Product {
   final String id;
   String title;
   String imageUrl;
   bool isFavorite;
 
-  Shop({
+  Product({
     required this.id,
     required this.title,
     required this.imageUrl,

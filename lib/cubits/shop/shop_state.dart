@@ -7,9 +7,8 @@ final class InitialState extends ShopState {}
 final class LoadingState extends ShopState {}
 
 final class LoadedState extends ShopState {
-  List<Shop> products;
+  List<Product> products;
   LoadedState(this.products);
-  
 }
 
 final class ErrorState extends ShopState {
